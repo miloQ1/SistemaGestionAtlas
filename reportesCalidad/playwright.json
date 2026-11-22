@@ -1,0 +1,764 @@
+{
+  "config": {
+    "argv": [
+      "/opt/hostedtoolcache/node/22.23.5/x64/bin/node",
+      "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/node_modules/.bin/playwright",
+      "test"
+    ],
+    "configFile": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/playwright.config.js",
+    "rootDir": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/miloQ1/SistemaGestionAtlas/commit/2d7de0d1a4ca7f2ca16082eaee4df44a2738825e",
+        "commitHash": "2d7de0d1a4ca7f2ca16082eaee4df44a2738825e",
+        "buildHref": "https://github.com/miloQ1/SistemaGestionAtlas/actions/runs/45081104436"
+      },
+      "gitCommit": {
+        "shortHash": "2d7de0d",
+        "hash": "2d7de0d1a4ca7f2ca16082eaee4df44a2738825e",
+        "subject": "Pipeline: Trivy y ZAP con imágenes oficiales de Docker",
+        "body": "Pipeline: Trivy y ZAP con imágenes oficiales de Docker\n",
+        "author": {
+          "name": "miloQ1",
+          "email": "ca.queupil@duocuc.cl",
+          "time": 1795388606000
+        },
+        "committer": {
+          "name": "miloQ1",
+          "email": "ca.queupil@duocuc.cl",
+          "time": 1795388606000
+        },
+        "branch": "main"
+      },
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/reports/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/miloQ1/SistemaGestionAtlas/commit/2d7de0d1a4ca7f2ca16082eaee4df44a2738825e",
+            "commitHash": "2d7de0d1a4ca7f2ca16082eaee4df44a2738825e",
+            "buildHref": "https://github.com/miloQ1/SistemaGestionAtlas/actions/runs/45081104436"
+          },
+          "gitCommit": {
+            "shortHash": "2d7de0d",
+            "hash": "2d7de0d1a4ca7f2ca16082eaee4df44a2738825e",
+            "subject": "Pipeline: Trivy y ZAP con imágenes oficiales de Docker",
+            "body": "Pipeline: Trivy y ZAP con imágenes oficiales de Docker\n",
+            "author": {
+              "name": "miloQ1",
+              "email": "ca.queupil@duocuc.cl",
+              "time": 1795388606000
+            },
+            "committer": {
+              "name": "miloQ1",
+              "email": "ca.queupil@duocuc.cl",
+              "time": 1795388606000
+            },
+            "branch": "main"
+          },
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/reports/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/miloQ1/SistemaGestionAtlas/commit/2d7de0d1a4ca7f2ca16082eaee4df44a2738825e",
+            "commitHash": "2d7de0d1a4ca7f2ca16082eaee4df44a2738825e",
+            "buildHref": "https://github.com/miloQ1/SistemaGestionAtlas/actions/runs/45081104436"
+          },
+          "gitCommit": {
+            "shortHash": "2d7de0d",
+            "hash": "2d7de0d1a4ca7f2ca16082eaee4df44a2738825e",
+            "subject": "Pipeline: Trivy y ZAP con imágenes oficiales de Docker",
+            "body": "Pipeline: Trivy y ZAP con imágenes oficiales de Docker\n",
+            "author": {
+              "name": "miloQ1",
+              "email": "ca.queupil@duocuc.cl",
+              "time": 1795388606000
+            },
+            "committer": {
+              "name": "miloQ1",
+              "email": "ca.queupil@duocuc.cl",
+              "time": 1795388606000
+            },
+            "branch": "main"
+          },
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/e2e",
+        "snapshotDir": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 30000,
+        "use": {
+          "baseURL": "http://localhost:3000",
+          "headless": true,
+          "screenshot": "on",
+          "trace": "retain-on-failure",
+          "viewport": {
+            "width": 1280,
+            "height": 800
+          }
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "outputFolder": "reports/playwright",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "reports/playwright.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "atlas.spec.js",
+      "file": "atlas.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Autenticación (RF-1)",
+          "file": "atlas.spec.js",
+          "line": 22,
+          "column": 6,
+          "specs": [
+            {
+              "title": "E2E-01 Login de administrador muestra el panel con su rol",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 387,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-22T23:05:21.602Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/reports/playwright-artifacts/atlas-Autenticación-RF-1-E-d87b2-muestra-el-panel-con-su-rol/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b081a440326219b9d8ba-8fd3812cae3cd16645a3",
+              "file": "atlas.spec.js",
+              "line": 23,
+              "column": 3
+            },
+            {
+              "title": "E2E-02 Login con contraseña incorrecta muestra error genérico",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 322,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-22T23:05:23.452Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/reports/playwright-artifacts/atlas-Autenticación-RF-1-E-5640d-ecta-muestra-error-genérico/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b081a440326219b9d8ba-0b9ed48659dd4a75ec6a",
+              "file": "atlas.spec.js",
+              "line": 28,
+              "column": 3
+            },
+            {
+              "title": "E2E-03 Cerrar sesión elimina el token del navegador",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 372,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-22T23:05:23.786Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/reports/playwright-artifacts/atlas-Autenticación-RF-1-E-9d445-mina-el-token-del-navegador/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b081a440326219b9d8ba-411200b5cd71741f8319",
+              "file": "atlas.spec.js",
+              "line": 36,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "Gestión de clientes (RF-4)",
+          "file": "atlas.spec.js",
+          "line": 44,
+          "column": 6,
+          "specs": [
+            {
+              "title": "E2E-04 Administrador crea un cliente y aparece en la lista",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 423,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-22T23:05:24.169Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/reports/playwright-artifacts/atlas-Gestión-de-clientes--930e1-iente-y-aparece-en-la-lista/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b081a440326219b9d8ba-99aa1a348e8ef9fcadff",
+              "file": "atlas.spec.js",
+              "line": 45,
+              "column": 3
+            },
+            {
+              "title": "E2E-05 Eliminar cliente solicita confirmación antes de la eliminación lógica",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 1290,
+                      "error": {
+                        "message": "Error: La ERS (RF-4) exige confirmación antes de eliminar\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: La ERS (RF-4) exige confirmación antes de eliminar\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/e2e/atlas.spec.js:67:85",
+                        "location": {
+                          "file": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/e2e/atlas.spec.js",
+                          "column": 85,
+                          "line": 67
+                        },
+                        "snippet": "  65 |     await page.getByRole('button', { name: `Intentar eliminar a ${nombre}` }).click();\n  66 |     await page.waitForTimeout(800);\n> 67 |     expect(pidioConfirmacion, 'La ERS (RF-4) exige confirmación antes de eliminar').toBe(true);\n     |                                                                                     ^\n  68 |   });\n  69 |\n  70 |   test('E2E-06 Texto con <script> se muestra como texto y no se ejecuta (XSS reflejado en UI)', async ({ page }) => {"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/e2e/atlas.spec.js",
+                            "column": 85,
+                            "line": 67
+                          },
+                          "message": "Error: La ERS (RF-4) exige confirmación antes de eliminar\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  65 |     await page.getByRole('button', { name: `Intentar eliminar a ${nombre}` }).click();\n  66 |     await page.waitForTimeout(800);\n> 67 |     expect(pidioConfirmacion, 'La ERS (RF-4) exige confirmación antes de eliminar').toBe(true);\n     |                                                                                     ^\n  68 |   });\n  69 |\n  70 |   test('E2E-06 Texto con <script> se muestra como texto y no se ejecuta (XSS reflejado en UI)', async ({ page }) => {\n    at /home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/e2e/atlas.spec.js:67:85"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-22T23:05:24.605Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/reports/playwright-artifacts/atlas-Gestión-de-clientes--d603f-es-de-la-eliminación-lógica/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/reports/playwright-artifacts/atlas-Gestión-de-clientes--d603f-es-de-la-eliminación-lógica/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/reports/playwright-artifacts/atlas-Gestión-de-clientes--d603f-es-de-la-eliminación-lógica/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/e2e/atlas.spec.js",
+                        "column": 85,
+                        "line": 67
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "b081a440326219b9d8ba-fea83b56c2106411c063",
+              "file": "atlas.spec.js",
+              "line": 55,
+              "column": 3
+            },
+            {
+              "title": "E2E-06 Texto con <script> se muestra como texto y no se ejecuta (XSS reflejado en UI)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 500,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-22T23:05:26.351Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/reports/playwright-artifacts/atlas-Gestión-de-clientes--c22a4-jecuta-XSS-reflejado-en-UI-/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b081a440326219b9d8ba-2b51feb306c78cb6e3f0",
+              "file": "atlas.spec.js",
+              "line": 70,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "Control de acceso por rol en la interfaz (RF-3, RB-4)",
+          "file": "atlas.spec.js",
+          "line": 82,
+          "column": 6,
+          "specs": [
+            {
+              "title": "E2E-07 Editor no ve la sección Auditoría",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 328,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-22T23:05:26.947Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/reports/playwright-artifacts/atlas-Control-de-acceso-po-23190--no-ve-la-sección-Auditoría/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b081a440326219b9d8ba-9f91ea857ce7e7d3b09e",
+              "file": "atlas.spec.js",
+              "line": 83,
+              "column": 3
+            },
+            {
+              "title": "E2E-08 Editor no tiene disponible el formulario de creación de clientes",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 5338,
+                      "error": {
+                        "message": "Error: RB-4: el editor solo tiene permisos de lectura\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Crear cliente' })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - RB-4: el editor solo tiene permisos de lectura getByRole('button', { name: 'Crear cliente' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Crear cliente' })\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+                        "stack": "Error: RB-4: el editor solo tiene permisos de lectura\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Crear cliente' })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - RB-4: el editor solo tiene permisos de lectura getByRole('button', { name: 'Crear cliente' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Crear cliente' })\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n    at /home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/e2e/atlas.spec.js:91:121",
+                        "location": {
+                          "file": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/e2e/atlas.spec.js",
+                          "column": 121,
+                          "line": 91
+                        },
+                        "snippet": "  89 |   test('E2E-08 Editor no tiene disponible el formulario de creación de clientes', async ({ page }) => {\n  90 |     await login(page, 'editor@atlas.cl');\n> 91 |     await expect(page.getByRole('button', { name: 'Crear cliente' }), 'RB-4: el editor solo tiene permisos de lectura').toHaveCount(0);\n     |                                                                                                                         ^\n  92 |   });\n  93 |\n  94 |   test('E2E-09 Editor que intenta eliminar recibe HTTP 403', async ({ page }) => {"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/e2e/atlas.spec.js",
+                            "column": 121,
+                            "line": 91
+                          },
+                          "message": "Error: RB-4: el editor solo tiene permisos de lectura\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Crear cliente' })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - RB-4: el editor solo tiene permisos de lectura getByRole('button', { name: 'Crear cliente' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Crear cliente' })\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n  89 |   test('E2E-08 Editor no tiene disponible el formulario de creación de clientes', async ({ page }) => {\n  90 |     await login(page, 'editor@atlas.cl');\n> 91 |     await expect(page.getByRole('button', { name: 'Crear cliente' }), 'RB-4: el editor solo tiene permisos de lectura').toHaveCount(0);\n     |                                                                                                                         ^\n  92 |   });\n  93 |\n  94 |   test('E2E-09 Editor que intenta eliminar recibe HTTP 403', async ({ page }) => {\n    at /home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/e2e/atlas.spec.js:91:121"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-22T23:05:27.292Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/reports/playwright-artifacts/atlas-Control-de-acceso-po-d8728-rio-de-creación-de-clientes/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/reports/playwright-artifacts/atlas-Control-de-acceso-po-d8728-rio-de-creación-de-clientes/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/reports/playwright-artifacts/atlas-Control-de-acceso-po-d8728-rio-de-creación-de-clientes/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/e2e/atlas.spec.js",
+                        "column": 121,
+                        "line": 91
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "b081a440326219b9d8ba-74caa863b3881d7932a4",
+              "file": "atlas.spec.js",
+              "line": 89,
+              "column": 3
+            },
+            {
+              "title": "E2E-09 Editor que intenta eliminar recibe HTTP 403",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 422,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-22T23:05:33.065Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/reports/playwright-artifacts/atlas-Control-de-acceso-po-61cce-ta-eliminar-recibe-HTTP-403/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b081a440326219b9d8ba-cf17644c7b79c06b974f",
+              "file": "atlas.spec.js",
+              "line": 94,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "Contratos y documentos (RF-5)",
+          "file": "atlas.spec.js",
+          "line": 101,
+          "column": 6,
+          "specs": [
+            {
+              "title": "E2E-10 Administrador asocia un PDF a un contrato y se lista",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 550,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-22T23:05:33.580Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/reports/playwright-artifacts/atlas-Contratos-y-document-6e5e1-DF-a-un-contrato-y-se-lista/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b081a440326219b9d8ba-b26334a60ab8c0639655",
+              "file": "atlas.spec.js",
+              "line": 102,
+              "column": 3
+            },
+            {
+              "title": "E2E-11 Un pdf_url malicioso (javascript:) no debe generar un enlace ejecutable",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 568,
+                      "error": {
+                        "message": "Error: NFR-SEG-5: enlace con javascript: en la tabla\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m2\u001b[39m\nReceived array:  \u001b[31m[\"javascript:alert(document.domain)\", \"javascript:alert(document.domain)\"]\u001b[39m",
+                        "stack": "Error: NFR-SEG-5: enlace con javascript: en la tabla\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m2\u001b[39m\nReceived array:  \u001b[31m[\"javascript:alert(document.domain)\", \"javascript:alert(document.domain)\"]\u001b[39m\n    at /home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/e2e/atlas.spec.js:124:130",
+                        "location": {
+                          "file": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/e2e/atlas.spec.js",
+                          "column": 130,
+                          "line": 124
+                        },
+                        "snippet": "  122 |     await expect(links.first()).toBeVisible();\n  123 |     const hrefs = await links.evaluateAll((els) => els.map((e) => e.getAttribute('href')));\n> 124 |     expect(hrefs.filter((h) => h && h.toLowerCase().startsWith('javascript:')), 'NFR-SEG-5: enlace con javascript: en la tabla').toHaveLength(0);\n      |                                                                                                                                  ^\n  125 |   });\n  126 | });\n  127 |"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/e2e/atlas.spec.js",
+                            "column": 130,
+                            "line": 124
+                          },
+                          "message": "Error: NFR-SEG-5: enlace con javascript: en la tabla\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m2\u001b[39m\nReceived array:  \u001b[31m[\"javascript:alert(document.domain)\", \"javascript:alert(document.domain)\"]\u001b[39m\n\n  122 |     await expect(links.first()).toBeVisible();\n  123 |     const hrefs = await links.evaluateAll((els) => els.map((e) => e.getAttribute('href')));\n> 124 |     expect(hrefs.filter((h) => h && h.toLowerCase().startsWith('javascript:')), 'NFR-SEG-5: enlace con javascript: en la tabla').toHaveLength(0);\n      |                                                                                                                                  ^\n  125 |   });\n  126 | });\n  127 |\n    at /home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/e2e/atlas.spec.js:124:130"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-22T23:05:34.143Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/reports/playwright-artifacts/atlas-Contratos-y-document-e3aca-enerar-un-enlace-ejecutable/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/reports/playwright-artifacts/atlas-Contratos-y-document-e3aca-enerar-un-enlace-ejecutable/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/reports/playwright-artifacts/atlas-Contratos-y-document-e3aca-enerar-un-enlace-ejecutable/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/SistemaGestionAtlas/SistemaGestionAtlas/tests/e2e/atlas.spec.js",
+                        "column": 130,
+                        "line": 124
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "b081a440326219b9d8ba-eaa3b56b2f6d269d9134",
+              "file": "atlas.spec.js",
+              "line": 113,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-22T23:05:21.129Z",
+    "duration": 13670.657,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

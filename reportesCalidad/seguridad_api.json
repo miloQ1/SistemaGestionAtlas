@@ -1,0 +1,199 @@
+{
+  "fecha": "2026-11-22T23:05:20.484Z",
+  "resumen": {
+    "total": 21,
+    "aprobados": 9,
+    "fallidos": 12
+  },
+  "resultados": [
+    {
+      "id": "SEG-01",
+      "nombre": "SQL Injection en login",
+      "requisito": "NFR-SEG-5",
+      "esperado": "HTTP 401, sin acceso",
+      "obtenido": "HTTP 401",
+      "resultado": "APROBADO",
+      "criticidad": "-"
+    },
+    {
+      "id": "SEG-02",
+      "nombre": "SQL Injection en parámetro :id",
+      "requisito": "NFR-SEG-5",
+      "esperado": "HTTP 400 (id inválido)",
+      "obtenido": "HTTP 400",
+      "resultado": "APROBADO",
+      "criticidad": "-"
+    },
+    {
+      "id": "SEG-03",
+      "nombre": "XSS en razón social (entrada sin sanear)",
+      "requisito": "NFR-SEG-5",
+      "esperado": "HTTP 400 o texto saneado",
+      "obtenido": "HTTP 201, se guardó: <script>alert(\"xss\")</script>",
+      "resultado": "FALLIDO",
+      "criticidad": "Baja (React escapa el texto al mostrarlo)"
+    },
+    {
+      "id": "SEG-04",
+      "nombre": "XSS almacenado vía pdf_url (javascript:)",
+      "requisito": "NFR-SEG-5",
+      "esperado": "HTTP 400, solo rutas de documentos válidas",
+      "obtenido": "HTTP 201, pdf_url guardado: javascript:alert(document.domain)",
+      "resultado": "FALLIDO",
+      "criticidad": "Alta"
+    },
+    {
+      "id": "SEG-05",
+      "nombre": "Payload excesivo (> 1 MB)",
+      "requisito": "NFR-SEG-5",
+      "esperado": "HTTP 413 (sin filtrar detalles internos)",
+      "obtenido": "HTTP 500 {\"error\":\"Error interno del servidor.\"}",
+      "resultado": "FALLIDO",
+      "criticidad": "Baja"
+    },
+    {
+      "id": "SEG-06",
+      "nombre": "Editor intenta CREAR cliente",
+      "requisito": "RF-3.2, RB-4, NFR-SEG-4",
+      "esperado": "HTTP 403",
+      "obtenido": "HTTP 201",
+      "resultado": "FALLIDO",
+      "criticidad": "Crítica"
+    },
+    {
+      "id": "SEG-07",
+      "nombre": "Editor intenta CREAR contrato/documento",
+      "requisito": "RF-3.2, RB-4, NFR-SEG-4",
+      "esperado": "HTTP 403",
+      "obtenido": "HTTP 201",
+      "resultado": "FALLIDO",
+      "criticidad": "Crítica"
+    },
+    {
+      "id": "SEG-08",
+      "nombre": "Editor intenta ELIMINAR cliente",
+      "requisito": "RF-3.2, RB-4",
+      "esperado": "HTTP 403",
+      "obtenido": "HTTP 403",
+      "resultado": "APROBADO",
+      "criticidad": "-"
+    },
+    {
+      "id": "SEG-09",
+      "nombre": "Editor intenta ver auditoría",
+      "requisito": "RB-4, NFR-SEG-4",
+      "esperado": "HTTP 403",
+      "obtenido": "HTTP 403",
+      "resultado": "APROBADO",
+      "criticidad": "-"
+    },
+    {
+      "id": "SEG-10",
+      "nombre": "Acceso sin token",
+      "requisito": "RF-1, NFR-SEG-9",
+      "esperado": "HTTP 401",
+      "obtenido": "HTTP 401",
+      "resultado": "APROBADO",
+      "criticidad": "-"
+    },
+    {
+      "id": "SEG-11",
+      "nombre": "Token alterado (rol cambiado sin re-firmar)",
+      "requisito": "NFR-SEG-9",
+      "esperado": "HTTP 401",
+      "obtenido": "HTTP 401",
+      "resultado": "APROBADO",
+      "criticidad": "-"
+    },
+    {
+      "id": "SEG-12",
+      "nombre": "Token con algoritmo \"none\"",
+      "requisito": "NFR-SEG-9",
+      "esperado": "HTTP 401",
+      "obtenido": "HTTP 401",
+      "resultado": "APROBADO",
+      "criticidad": "-"
+    },
+    {
+      "id": "SEG-13",
+      "nombre": "Token forjado con el secreto JWT expuesto en el repositorio",
+      "requisito": "NFR-SEG-6, NFR-SEG-9",
+      "esperado": "HTTP 401",
+      "obtenido": "HTTP 200, 4 clientes devueltos (con datos bancarios)",
+      "resultado": "FALLIDO",
+      "criticidad": "Crítica"
+    },
+    {
+      "id": "SEG-14",
+      "nombre": "Cierre de sesión y revocación de token",
+      "requisito": "RF-1.2, NFR-SEG-9",
+      "esperado": "Endpoint de logout y token inválido después (401)",
+      "obtenido": "logout HTTP 404; token sigue válido después (HTTP 200); vigencia 8 h sin refresh token",
+      "resultado": "FALLIDO",
+      "criticidad": "Alta"
+    },
+    {
+      "id": "SEG-15",
+      "nombre": "Fuerza bruta: 30 intentos fallidos seguidos",
+      "requisito": "NFR-SEG-5 / OWASP A07",
+      "esperado": "Bloqueo o HTTP 429 tras N intentos",
+      "obtenido": "sin bloqueo: 30 respuestas 401; login correcto posterior permitido",
+      "resultado": "FALLIDO",
+      "criticidad": "Media"
+    },
+    {
+      "id": "SEG-16",
+      "nombre": "Registro con contraseña débil (\"123\")",
+      "requisito": "Restricción 2.4 (12 car., may/min/núm/símbolo)",
+      "esperado": "HTTP 400",
+      "obtenido": "HTTP 201",
+      "resultado": "FALLIDO",
+      "criticidad": "Media"
+    },
+    {
+      "id": "SEG-17",
+      "nombre": "Enumeración de usuarios por mensaje de error",
+      "requisito": "OWASP A07",
+      "esperado": "Mismo mensaje para usuario inexistente y clave errónea",
+      "obtenido": "\"Credenciales inválidas\" / \"Credenciales inválidas\"",
+      "resultado": "APROBADO",
+      "criticidad": "-"
+    },
+    {
+      "id": "SEG-18",
+      "nombre": "Empresa B intenta acceder a cliente de empresa A (IDOR)",
+      "requisito": "RB-2",
+      "esperado": "HTTP 404 y lista vacía",
+      "obtenido": "DELETE HTTP 404, POST contrato HTTP 404, lista: 0 clientes",
+      "resultado": "APROBADO",
+      "criticidad": "-"
+    },
+    {
+      "id": "SEG-19",
+      "nombre": "Datos bancarios expuestos en texto plano",
+      "requisito": "NFR-SEG-3, NFR-SEG-8 (Ley 19.628 / 21.719)",
+      "esperado": "Datos cifrados o enmascarados",
+      "obtenido": "editor recibe: {\"banco\":\"Banco de Chile\",\"cuenta\":\"00-12345-6\"}",
+      "resultado": "FALLIDO",
+      "criticidad": "Alta"
+    },
+    {
+      "id": "SEG-20",
+      "nombre": "CORS con origen no autorizado",
+      "requisito": "NFR-SEG-5 / OWASP A05",
+      "esperado": "Origen rechazado (sin cabecera ACAO)",
+      "obtenido": "Access-Control-Allow-Origin: *",
+      "resultado": "FALLIDO",
+      "criticidad": "Media"
+    },
+    {
+      "id": "SEG-21",
+      "nombre": "Cabeceras de seguridad HTTP",
+      "requisito": "NFR-SEG-1 / OWASP A05",
+      "esperado": "CSP, X-Frame-Options, nosniff, HSTS presentes; sin X-Powered-By",
+      "obtenido": "faltan: content-security-policy, x-frame-options, x-content-type-options, strict-transport-security; X-Powered-By: Express",
+      "resultado": "FALLIDO",
+      "criticidad": "Media"
+    }
+  ]
+}
