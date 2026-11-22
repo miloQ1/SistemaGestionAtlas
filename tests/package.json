@@ -1,0 +1,20 @@
+{
+  "name": "atlas-tests",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Pruebas automatizadas de Atlas (EP3 ISY1102)",
+  "scripts": {
+    "test:security": "node security/pruebas_seguridad_api.mjs reports/seguridad_api.json",
+    "test:api": "newman run api/atlas.postman_collection.json -e api/atlas.postman_environment.json -r cli,htmlextra,json --reporter-htmlextra-export reports/newman.html --reporter-json-export reports/newman.json",
+    "test:e2e": "playwright test",
+    "test:lighthouse": "lighthouse http://localhost:3000 --only-categories=performance,accessibility,best-practices --output=html --output=json --locale=es --output-path=reports/lighthouse --chrome-flags=\"--headless=new --no-sandbox\"",
+    "test:carga": "node carga/carga.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.65.1",
+    "autocannon": "^9.0.0",
+    "lighthouse": "^13.6.0",
+    "newman": "^6.2.3",
+    "newman-reporter-htmlextra": "^1.23.1"
+  }
+}

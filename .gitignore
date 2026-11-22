@@ -1,0 +1,10 @@
+# Dependencias y builds
+node_modules/
+dist/
+# Secretos: nunca versionar (hallazgo DEF-02)
+.env
+*.env
+!.env.example
+# Reportes generados por las pruebas
+tests/reports/
+tests/test-results/

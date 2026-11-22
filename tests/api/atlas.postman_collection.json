@@ -1,0 +1,189 @@
+{
+  "info": {
+    "name": "Atlas - Pruebas funcionales de API (EP3 ISY1102)",
+    "description": "Colección de pruebas automatizadas para los endpoints críticos de Atlas. Ejecutar con: npx newman run tests/api/atlas.postman_collection.json -e tests/api/atlas.postman_environment.json",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "event": [
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// NFR-PERF-1: operaciones simples bajo 300 ms",
+          "pm.test('NFR-PERF-1 tiempo de respuesta < 300 ms', () => pm.expect(pm.response.responseTime).to.be.below(300));"
+        ]
+      }
+    }
+  ],
+  "item": [
+    {
+      "name": "API-01 Health check",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/health" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('Responde 200 y status ok', () => { pm.response.to.have.status(200); pm.expect(pm.response.json().status).to.eql('ok'); });"
+      ] } }]
+    },
+    {
+      "name": "API-02 Login administrador (RF-1.1)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\"email\":\"{{adminEmail}}\",\"password\":\"{{password}}\"}" },
+        "url": "{{baseUrl}}/api/auth/login"
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('Responde 200', () => pm.response.to.have.status(200));",
+        "const body = pm.response.json();",
+        "pm.test('Entrega un JWT y el rol ADMINISTRADOR', () => { pm.expect(body.token.split('.')).to.have.length(3); pm.expect(body.usuario.rol).to.eql('ADMINISTRADOR'); });",
+        "pm.test('No expone el hash de la contraseña', () => pm.expect(JSON.stringify(body)).to.not.include('password_hash'));",
+        "pm.collectionVariables.set('tokenAdmin', body.token);"
+      ] } }]
+    },
+    {
+      "name": "API-03 Login editor (RF-1.1)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\"email\":\"{{editorEmail}}\",\"password\":\"{{password}}\"}" },
+        "url": "{{baseUrl}}/api/auth/login"
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('Responde 200 con rol EDITOR', () => { pm.response.to.have.status(200); pm.expect(pm.response.json().usuario.rol).to.eql('EDITOR'); });",
+        "pm.collectionVariables.set('tokenEditor', pm.response.json().token);"
+      ] } }]
+    },
+    {
+      "name": "API-04 Login con contraseña incorrecta",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\"email\":\"{{adminEmail}}\",\"password\":\"incorrecta\"}" },
+        "url": "{{baseUrl}}/api/auth/login"
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('Responde 401 con mensaje genérico', () => { pm.response.to.have.status(401); pm.expect(pm.response.json().error).to.eql('Credenciales inválidas'); });"
+      ] } }]
+    },
+    {
+      "name": "API-05 Listar clientes (RF-4.2)",
+      "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{tokenAdmin}}" }], "url": "{{baseUrl}}/api/clientes" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('Responde 200 con un arreglo', () => { pm.response.to.have.status(200); pm.expect(pm.response.json()).to.be.an('array'); });",
+        "pm.test('Solo clientes de la empresa del usuario (RB-2)', () => pm.response.json().forEach(c => pm.expect(c.empresa_id).to.eql(1)));"
+      ] } }]
+    },
+    {
+      "name": "API-06 Crear cliente como administrador (RF-4.1)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Authorization", "value": "Bearer {{tokenAdmin}}" }, { "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\"rut\":\"77.123.456-7\",\"razon_social\":\"Cliente Postman SpA\",\"datos_bancarios\":{\"banco\":\"BancoEstado\",\"cuenta\":\"123456\"}}" },
+        "url": "{{baseUrl}}/api/clientes"
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('Responde 201 y devuelve el id', () => { pm.response.to.have.status(201); pm.expect(pm.response.json().id).to.be.a('number'); });",
+        "pm.collectionVariables.set('clienteId', pm.response.json().id);"
+      ] } }]
+    },
+    {
+      "name": "API-07 Validación: RUT con más de 12 caracteres (RF-4.3)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Authorization", "value": "Bearer {{tokenAdmin}}" }, { "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\"rut\":\"1234567890123456\",\"razon_social\":\"RUT largo\"}" },
+        "url": "{{baseUrl}}/api/clientes"
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('Responde 400 con mensaje de validación', () => { pm.response.to.have.status(400); pm.expect(pm.response.json().error).to.include('RUT'); });"
+      ] } }]
+    },
+    {
+      "name": "API-08 Validación: razón social vacía (RF-4.3)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Authorization", "value": "Bearer {{tokenAdmin}}" }, { "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\"rut\":\"11.111.111-1\",\"razon_social\":\"   \"}" },
+        "url": "{{baseUrl}}/api/clientes"
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('Responde 400', () => pm.response.to.have.status(400));"
+      ] } }]
+    },
+    {
+      "name": "API-09 Crear contrato con documento (RF-5.1 / RF-5.2)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Authorization", "value": "Bearer {{tokenAdmin}}" }, { "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\"pdf_url\":\"/uploads/contrato_postman.pdf\"}" },
+        "url": "{{baseUrl}}/api/contratos/{{clienteId}}/documentos"
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('Responde 201 y el contrato queda asociado al cliente (RB-3)', () => { pm.response.to.have.status(201); pm.expect(pm.response.json().contrato.cliente_id).to.eql(pm.collectionVariables.get('clienteId')); });",
+        "pm.test('RF-5.4: el contrato tiene fecha de inicio y término para calcular su estado', () => { const c = pm.response.json().contrato; pm.expect(c).to.have.property('fecha_inicio'); pm.expect(c).to.have.property('fecha_termino'); });"
+      ] } }]
+    },
+    {
+      "name": "API-10 Listar contratos (RF-5)",
+      "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{tokenAdmin}}" }], "url": "{{baseUrl}}/api/contratos" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('Responde 200 e incluye el contrato creado', () => { pm.response.to.have.status(200); pm.expect(pm.response.json().some(c => c.cliente_id === pm.collectionVariables.get('clienteId'))).to.be.true; });"
+      ] } }]
+    },
+    {
+      "name": "API-11 Editor NO puede eliminar cliente (RB-4)",
+      "request": { "method": "DELETE", "header": [{ "key": "Authorization", "value": "Bearer {{tokenEditor}}" }], "url": "{{baseUrl}}/api/clientes/{{clienteId}}" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('Responde 403', () => pm.response.to.have.status(403));"
+      ] } }]
+    },
+    {
+      "name": "API-12 Editor NO puede crear cliente (RB-4)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Authorization", "value": "Bearer {{tokenEditor}}" }, { "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\"rut\":\"33.333.333-3\",\"razon_social\":\"Cliente creado por editor\"}" },
+        "url": "{{baseUrl}}/api/clientes"
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('Responde 403', () => pm.response.to.have.status(403));"
+      ] } }]
+    },
+    {
+      "name": "API-13 Eliminación lógica de cliente (RF-4.2)",
+      "request": { "method": "DELETE", "header": [{ "key": "Authorization", "value": "Bearer {{tokenAdmin}}" }], "url": "{{baseUrl}}/api/clientes/{{clienteId}}" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('Responde 200 con mensaje de eliminación lógica', () => { pm.response.to.have.status(200); pm.expect(pm.response.json().mensaje).to.include('lógicamente'); });"
+      ] } }]
+    },
+    {
+      "name": "API-14 Cliente eliminado ya no aparece en la lista",
+      "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{tokenAdmin}}" }], "url": "{{baseUrl}}/api/clientes" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('El cliente eliminado no se lista', () => pm.expect(pm.response.json().some(c => c.id === pm.collectionVariables.get('clienteId'))).to.be.false);"
+      ] } }]
+    },
+    {
+      "name": "API-15 Auditoría registra las acciones críticas (RF-6.1)",
+      "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{tokenAdmin}}" }], "url": "{{baseUrl}}/api/auditoria" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "const acciones = pm.response.json().map(l => l.accion);",
+        "pm.test('Registra creación de cliente', () => pm.expect(acciones).to.include('CREAR_CLIENTE'));",
+        "pm.test('Registra subida de documento', () => pm.expect(acciones).to.include('SUBIR_DOCUMENTO_PDF'));",
+        "pm.test('Registra eliminación de cliente', () => pm.expect(acciones).to.include('ELIMINAR_CLIENTE'));"
+      ] } }]
+    },
+    {
+      "name": "API-16 Acceso sin token a auditoría",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/auditoria" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('Responde 401', () => pm.response.to.have.status(401));"
+      ] } }]
+    }
+  ],
+  "variable": [
+    { "key": "tokenAdmin", "value": "" },
+    { "key": "tokenEditor", "value": "" },
+    { "key": "clienteId", "value": "" }
+  ]
+}

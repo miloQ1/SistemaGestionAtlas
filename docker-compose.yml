@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  atlas-db:
+    image: postgres:15-alpine
+    container_name: atlas-db
+    environment:
+      POSTGRES_DB: atlas_db
+      POSTGRES_USER: atlas_admin
+      POSTGRES_PASSWORD: AtlasSecretPassword2026!
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U atlas_admin -d atlas_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - atlas-net
+
+  atlas-backend:
+    build: ./backend
+    container_name: atlas-backend
+    ports:
+      - "5000:5000"
+    environment:
+      PORT: 5000
+      DB_HOST: atlas-db
+      DB_PORT: 5432
+      DB_USER: atlas_admin
+      DB_PASSWORD: AtlasSecretPassword2026!
+      DB_NAME: atlas_db
+      JWT_SECRET: JWT_Secret_Atlas_ISY1102_2026_Key!
+    depends_on:
+      atlas-db:
+        condition: service_healthy
+    networks:
+      - atlas-net
+
+  atlas-frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: http://localhost:5000
+    container_name: atlas-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - atlas-backend
+    networks:
+      - atlas-net
+
+networks:
+  atlas-net:
+    driver: bridge
+
+volumes:
+  postgres_data:
