@@ -8,6 +8,7 @@ on:
     branches: [main, develop]
   pull_request:
     branches: [main]
+  workflow_dispatch:   # permite ejecutarlo a mano desde la pestaña Actions
 
 env:
   DB_USER: atlas_admin
@@ -15,6 +16,7 @@ env:
   # Los secretos se guardan en GitHub > Settings > Secrets, nunca en el código
   DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
   JWT_SECRET: ${{ secrets.JWT_SECRET }}
+  COMPOSE_PROJECT_NAME: atlas   # nombre fijo para las imágenes, sin importar el nombre del repo
 
 jobs:
   # 1) Análisis estático: secretos expuestos + reglas de seguridad en el código
@@ -22,14 +24,23 @@ jobs:
     name: SAST y secretos
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with: { fetch-depth: 0 }
       - name: Buscar secretos en el repositorio (gitleaks)
         uses: gitleaks/gitleaks-action@v2
-        env: { GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}" }
-      - uses: actions/setup-node@v4
-        with: { node-version: 20 }
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}   # solo necesario si el repo es de una organización
+      - name: Buscar contraseñas y secretos JWT en archivos de configuración
+        if: success() || failure()
+        run: |
+          bash tests/security/check_secrets.sh . | tee secretos.txt
+          if grep -qE "PASSWORD|SECRET" secretos.txt; then echo "Secretos encontrados en el repositorio"; exit 1; fi
+      - uses: actions/setup-node@v5
+        if: success() || failure()
+        with: { node-version: 22 }
       - name: ESLint con eslint-plugin-security
+        if: success() || failure()
         working-directory: backend
         run: npm ci && npx eslint . --max-warnings=0
 
@@ -38,29 +49,29 @@ jobs:
     name: Dependencias vulnerables
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: 20 }
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with: { node-version: 22 }
       - name: npm audit backend
         working-directory: backend
         run: npm ci && npm audit --audit-level=high
       - name: npm audit frontend
+        if: success() || failure()
         working-directory: frontend
         run: npm ci && npm audit --audit-level=high
 
   # 3) Construcción de imágenes y escaneo del contenedor
   build:
     name: Build y escaneo de imágenes
-    needs: [sast, sca]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Construir imágenes Docker
         run: docker compose build
       - name: Escanear imagen del backend (Trivy)
         uses: aquasecurity/trivy-action@0.28.0
         with:
-          image-ref: atlas-system-atlas-backend
+          image-ref: atlas-atlas-backend
           severity: CRITICAL,HIGH
           exit-code: '1'
 
@@ -70,27 +81,32 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: 20 }
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with: { node-version: 22 }
       - name: Levantar Atlas
         run: docker compose up -d --build && sleep 20
       - name: Instalar herramientas de prueba
         working-directory: tests
         run: npm ci && npx playwright install --with-deps chromium
       - name: Pruebas de API (Postman / Newman)
+        if: success() || failure()   # se ejecuta aunque falle la prueba anterior
         working-directory: tests
         run: npm run test:api
       - name: Pruebas de seguridad de la API
+        if: success() || failure()   # se ejecuta aunque falle la prueba anterior
         working-directory: tests
         run: npm run test:security
       - name: Pruebas E2E (Playwright)
+        if: success() || failure()   # se ejecuta aunque falle la prueba anterior
         working-directory: tests
         run: npm run test:e2e
       - name: Rendimiento y accesibilidad (Lighthouse)
+        if: success() || failure()   # se ejecuta aunque falle la prueba anterior
         working-directory: tests
         run: npm run test:lighthouse
       - name: Escaneo DAST (OWASP ZAP baseline)
+        if: success() || failure()   # se ejecuta aunque falle la prueba anterior
         uses: zaproxy/action-baseline@v0.14.0
         with:
           target: http://localhost:3000
@@ -107,6 +123,12 @@ jobs:
   gate:
     name: Gate de calidad
     needs: [sast, sca, build, pruebas]
+    if: always()
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Todos los controles aprobados. Build habilitado para despliegue."
+      - name: Evaluar resultado de los controles
+        run: |
+          if [[ "${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'skipped') }}" == "true" ]]; then
+            echo "Gate RECHAZADO: hay controles fallidos. Revisar reportes y corregir defectos."; exit 1
+          fi
+          echo "Gate APROBADO: build habilitado para despliegue."
